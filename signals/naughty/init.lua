@@ -56,10 +56,18 @@ naughty.connect_signal(
                valign = "center",
                {
                   widget = wibox.container.constraint,
-                  width = dpi(64),
-                  height = dpi(64),
+                  width = dpi(128),
+                  height = dpi(128),
                   strategy = "max",
-                  naughty.widget.icon
+                  {
+                     widget = naughty.widget.icon,
+                     notification = n,
+                     resize_strategy = "scale",
+                     scaling_quality = "best",
+                     upscale = true,
+                     downscale = true,
+                     resize = true
+                  }
                }
             },
             {
@@ -101,10 +109,11 @@ naughty.connect_signal(
          n.timeout = timeout
          naughty.layout.box {
             notification = n,
-            maximum_height = dpi(250),
+            maximum_height = dpi(256),
             ontop = true,
             position = "top_right",
             bg = "#1E2128",
+            fg = "#C4C7C5",
             border_width = dpi(2),
             border_color = border_color,
             widget_template = {
@@ -118,10 +127,11 @@ naughty.connect_signal(
          n.timeout = timeout
          naughty.layout.box {
             notification = n,
-            maximum_height = dpi(250),
+            maximum_height = dpi(288),
             ontop = true,
             position = "top_right",
             bg = "#1E2128",
+            fg = "#C4C7C5",
             border_width = dpi(2),
             border_color = border_color,
             widget_template = {

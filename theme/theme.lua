@@ -5,11 +5,6 @@ local dpi = require("beautiful.xresources").apply_dpi
 local theme = {}
 theme.wallpaper = themes_path .. "background.png"
 
-theme.notification_fg = "#C4C7C5"
-theme.notification_bg = "#1E2128"
-theme.notification_max_width = dpi(500)
--- }}}
-
 theme.icon_theme = "Win11-Dark"
 
 -- {{{ Styles
@@ -73,8 +68,10 @@ theme.mouse_finder_color = "#FF5250"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_height = dpi(25)
-theme.menu_width  = dpi(250)
+theme.menu_height       = dpi(25)
+theme.menu_width        = dpi(250)
+theme.menu_border_color = "#FFCC66"
+theme.menu_border_width = dpi(2)
 -- }}}
 
 -- {{{ Icons
