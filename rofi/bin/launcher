@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+rofi \
+-show drun \
+-modi run,drun,ssh,calc \
+-scroll-method 0 \
+-drun-match-fields all \
+-drun-display-format "{name}" \
+-no-drun-show-actions \
+-terminal alacritty \
+-kb-cancel Alt-F1 \
+-theme "$HOME"/.config/awesome/rofi/colors/launcher.rasi
