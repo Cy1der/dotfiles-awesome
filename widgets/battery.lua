@@ -54,7 +54,7 @@ local function worker()
 
     local notification
     local function show_battery_status()
-        awful.spawn.easy_async([[bash -c 'acpi']],
+        awful.spawn.easy_async([[bash -c 'acpi| grep -v "rate information unavailable"']],
             function(out, _, _, _)
                 naughty.destroy(notification)
                 notification = naughty.notify {
@@ -81,7 +81,7 @@ local function worker()
 
     local last_battery_check = os.time();
 
-    watch("acpi -i", timeout, function(widget, out)
+    watch([[ bash -c 'acpi -i | grep -v "rate information unavailable"' ]], timeout, function(widget, out)
         local battery_info = {}
         local capacities = {}
 
@@ -129,7 +129,9 @@ local function worker()
             iconBatteryStatus = "discharging"
         end
 
-        if ((charge >= 0 and charge <= 30) and status ~= 'Charging' and os.difftime(os.time(), last_battery_check) > 300
+        if (
+            (charge >= 0 and charge <= 30) and status ~= 'Charging' and
+                os.difftime(os.time(), last_battery_check) > 300
             ) then
             last_battery_check = os.time()
             show_battery_warning()
