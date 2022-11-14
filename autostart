@@ -16,8 +16,6 @@ fi
 
 exec xrdb -merge ~/.Xresources &
 
-# exec dunst &
-# exec plank &
 exec thunar --daemon &
 
 ksuperkey -e 'Super_L=Alt_L|F1' &
@@ -28,6 +26,7 @@ exec touchegg &
 exec copyq &
 exec kdeconnect-indicator &
 exec blueman-applet &
+exec firewall-applet &
 
 if [[ ! `pidof DiscordCanary` ]]; then
     exec discord-canary --start-minimized &
