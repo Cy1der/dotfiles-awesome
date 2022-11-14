@@ -26,7 +26,10 @@ exec touchegg &
 exec copyq &
 exec kdeconnect-indicator &
 exec blueman-applet &
-exec firewall-applet &
+
+if [[ ! `ps ax | grep '/usr/bin/python /usr/bin/firewall-applet' | grep -v grep | awk '{print $1}'` ]]; then
+    exec firewall-applet &
+fi
 
 if [[ ! `pidof DiscordCanary` ]]; then
     exec discord-canary --start-minimized &
