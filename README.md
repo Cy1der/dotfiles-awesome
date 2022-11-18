@@ -24,7 +24,7 @@ A lot of code isn't mine, some including:
 - brightnessctl
 - NetworkManager
 - Blueman
-- Sharenix
+- Sharenix`
 - networkmanager_dmenu
 - xfce4-settings-manager
 

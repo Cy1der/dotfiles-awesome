@@ -6,4 +6,4 @@ require 'bindings'
 require 'rules'
 require 'signals'
 require 'modules'
-awful.spawn("bash ~/.config/awesome/autostart")
+awful.util.spawn_with_shell("bash ~/.config/awesome/autostart")
