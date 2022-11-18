@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# nitrogen --restore &
 xfsettingsd &
 xfce4-power-manager &
 

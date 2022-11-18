@@ -1,0 +1,8 @@
+#!/bin/bash
+
+amixer -D pulse get Capture | grep '\[on\]' &>/dev/null
+if [[ "$?" == 0 ]]; then
+    amixer -D pulse sset Capture toggle && dunstify -u low --replace=69 "Microphone Off"
+else
+    amixer -D pulse sset Capture toggle && dunstify -u low --replace=69 "Microphone On"
+fi

@@ -12,19 +12,11 @@ local dpi = xresources.apply_dpi
 local LIST_DEVICES_CMD = [[sh -c "pacmd list-sinks; pacmd list-sources"]]
 local function GET_VOLUME_CMD(device) return 'amixer -D ' .. device .. ' sget Master' end
 
---local function GET_VOLUME_CMD(device) return 'volume' end
-
 local function INC_VOLUME_CMD(device, step) return 'amixer -D ' .. device .. ' sset Master ' .. step .. '%+' end
-
---local function INC_VOLUME_CMD(device, step) return 'volume --inc' end
 
 local function DEC_VOLUME_CMD(device, step) return 'amixer -D ' .. device .. ' sset Master ' .. step .. '%-' end
 
---local function DEC_VOLUME_CMD(device, step) return 'volume --dec' end
-
 local function TOG_VOLUME_CMD(device) return 'amixer -D ' .. device .. ' sset Master toggle' end
-
---local function TOG_VOLUME_CMD(device) return 'volume --toggle' end
 
 local widget_types = {
     icon_and_text = require 'widgets.volume.icon_and_text',

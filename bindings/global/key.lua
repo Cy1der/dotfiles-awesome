@@ -83,7 +83,7 @@ awful.keyboard.append_global_keybindings {
       description = "open calculator",
       group = "rofi",
       on_press = function()
-         awful.util.spawn_with_shell('rofi -show calc -theme /home/ahmed/.config/awesome/rofi/colors/calc.rasi -terse')
+         awful.util.spawn_with_shell('rofi -show calc -theme ~/.config/awesome/rofi/colors/calc.rasi -terse')
       end
    },
    awful.key {
@@ -181,7 +181,7 @@ awful.keyboard.append_global_keybindings {
       description = "toggle mute microphone",
       group = "system",
       on_press = function()
-         awful.util.spawn_with_shell('volume --toggle-mic')
+         awful.util.spawn_with_shell('bash ~/.config/awesome/scripts/toggle-mic')
       end
    },
    awful.key {
