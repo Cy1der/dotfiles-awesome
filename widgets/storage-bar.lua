@@ -9,24 +9,17 @@ local dpi = xresources.apply_dpi
 
 local storage_bar_widget = {}
 
---- Table with widget configuration, consists of three sections:
----  - general - general configuration
----  - widget - configuration of the widget displayed on the wibar
----  - popup - configuration of the popup
 local config = {}
 
--- general
 config.mounts = { '/' }
 config.refresh_rate = 60
 
--- wibar widget
 config.widget_width = 40
 config.widget_bar_color = '#586074'
 config.widget_onclick_bg = '#ff0000'
 config.widget_border_color = '#586074'
 config.widget_background_color = '#1E2128'
 
--- popup
 config.popup_bg = '#1E2128'
 config.popup_border_width = dpi(2)
 config.popup_border_color = '#FFCC66'
@@ -34,12 +27,14 @@ config.popup_bar_color = '#586074'
 config.popup_bar_background_color = '#1E2128'
 config.popup_bar_border_color = '#586074'
 
+local function round(num, numDecimalPlaces)
+    local mult = 10 ^ (numDecimalPlaces or 0)
+    return math.floor(num * mult + 0.5) / mult
+end
+
 local function worker(user_args)
     local args = user_args or {}
 
-    -- Setup config for the widget instance.
-    -- The `_config` table will keep the first existing value after checking
-    -- in this order: user parameter > beautiful > module default.
     local _config = {}
     for prop, value in pairs(config) do
         _config[prop] = args[prop] or beautiful[prop] or value
@@ -97,7 +92,7 @@ local function worker(user_args)
         visible = false,
         border_width = _config.popup_border_width,
         border_color = _config.popup_border_color,
-        maximum_width = 400,
+        maximum_width = dpi(550),
         offset = { y = 5 },
         widget = {}
     }
@@ -159,10 +154,10 @@ local function worker(user_args)
                         widget = wibox.widget.progressbar,
                     },
                     {
-                        text = math.floor(disks[v].used / 1024 / 1024)
+                        text = round(disks[v].used / 1024 / 1024, 2)
                             .. '/'
-                            .. math.floor(disks[v].size / 1024 / 1024) .. 'GB('
-                            .. math.floor(disks[v].perc) .. '%)',
+                            .. round(disks[v].size / 1024 / 1024, 2) .. 'GB('
+                            .. round(disks[v].perc, 2) .. '%)',
                         widget = wibox.widget.textbox
                     },
                     layout = wibox.layout.ratio.horizontal
@@ -186,6 +181,13 @@ local function worker(user_args)
 
     return storage_bar_widget
 end
+
+--[[
+    text = math.floor(disks[v].used / 1024 / 1024)
+    .. '/'
+    .. math.floor(disks[v].size / 1024 / 1024) .. 'GB('
+    .. math.floor(disks[v].perc) .. '%)',
+]] --
 
 return setmetatable(storage_bar_widget, { __call = function(_, ...)
     return worker(...)
