@@ -15,12 +15,12 @@ local spawn = require("awful.spawn")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 
-local dpi = require('beautiful').xresources.apply_dpi
+local step = 5
 
-local get_brightness_cmd
-local set_brightness_cmd
-local inc_brightness_cmd
-local dec_brightness_cmd
+local get_brightness_cmd = 'sh -c "brightnessctl -m | cut -d, -f4 | tr -d %"'
+local set_brightness_cmd = "brightnessctl set %d%%"
+local inc_brightness_cmd = "brightnessctl set +" .. step .. "%"
+local dec_brightness_cmd = "brightnessctl set " .. step .. "-%"
 
 local brightness_widget = {}
 
@@ -40,31 +40,9 @@ local function worker(user_args)
     local font = args.font or beautiful.font
     local timeout = 3
 
-    local program = "brightnessctl"
-    local step = args.step or 5
-    --local base = args.base or 20
     local current_level = 0 -- current brightness value
     local tooltip = args.tooltip or false
     local percentage = true
-    if program == 'light' then
-        get_brightness_cmd = 'light -G'
-        set_brightness_cmd = 'light -S %d' -- <level>
-        inc_brightness_cmd = 'light -A ' .. step
-        dec_brightness_cmd = 'light -U ' .. step
-    elseif program == 'xbacklight' then
-        get_brightness_cmd = 'xbacklight -get'
-        set_brightness_cmd = 'xbacklight -set %d' -- <level>
-        inc_brightness_cmd = 'xbacklight -inc ' .. step
-        dec_brightness_cmd = 'xbacklight -dec ' .. step
-    elseif program == 'brightnessctl' then
-        get_brightness_cmd = 'sh -c "brightnessctl -m | cut -d, -f4 | tr -d %"'
-        set_brightness_cmd = "brightnessctl set %d%%" -- <level>
-        inc_brightness_cmd = "brightnessctl set +" .. step .. "%"
-        dec_brightness_cmd = "brightnessctl set " .. step .. "-%"
-    else
-        show_warning(program .. " command is not supported by the widget")
-        return
-    end
 
     if type == 'icon_and_text' then
         brightness_widget.widget = wibox.widget {

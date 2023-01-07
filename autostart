@@ -5,9 +5,9 @@ xfce4-power-manager &
 
 exec picom &
 
-if [[ $(xrandr -q | grep 'DP2 connected') ]]; then
-    xrandr --output eDP1 --primary --mode 2560x1440 --rotate normal --output DP2 --mode 1920x1080 --rotate normal --above eDP1
-fi
+# if [[ $(xrandr -q | grep 'DP2 connected') ]]; then
+#     xrandr --output eDP1 --primary --mode 2560x1440 --rotate normal --output DP2 --mode 1920x1080 --rotate normal --above eDP1
+# fi
 
 if [[ ! `pidof xfce-polkit` ]]; then
     /usr/lib/xfce-polkit/xfce-polkit &
@@ -25,6 +25,7 @@ exec touchegg &
 exec copyq &
 exec kdeconnect-indicator &
 exec blueman-applet &
+exec remind -fa -m ~/.reminders/reminders.rem &
 
 if [[ ! `ps ax | grep '/usr/bin/python /usr/bin/firewall-applet' | grep -v grep | awk '{print $1}'` ]]; then
     exec firewall-applet &

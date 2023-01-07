@@ -27,32 +27,21 @@ screens = {
             return nil
         end
     },
+    ['657654565323'] = { -- DP2
+        ['connected'] = function(xrandrOutput)
+            if xrandrOutput ~= defaultOutput then
+                return '--output ' ..
+                    defaultOutput ..
+                    ' --primary --mode 2560x1440 --pos 0x1080 --rotate normal --output ' ..
+                    xrandrOutput .. ' --mode 1920x1080 --pos 320x0 --rotate normal'
+            end
+            return nil
+        end,
+        ['disconnected'] = function(xrandrOutput)
+            if xrandrOutput ~= defaultOutput then
+                return '--output ' .. xrandrOutput .. ' --off --output ' .. defaultOutput .. ' --auto'
+            end
+            return nil
+        end
+    }
 }
---	['657654565323'] = { -- DP2
---		['connected'] = function (xrandrOutput)
---			if xrandrOutput ~= defaultOutput then
---				return '--output ' .. xrandrOutput .. ' --auto --same-as ' .. defaultOutput
---			end
---			return nil
---		end,
---		['disconnected'] = function (xrandrOutput)
---			if xrandrOutput ~= defaultOutput then
---			return '--output ' .. xrandrOutput .. ' --off --output ' .. defaultOutput .. ' --auto'
---			end
---			return nil
---		end
---	}
---	['3500000'] = { -- /sys/class/drm/card0/card0-eDP-1
---		['connected'] = function (xrandrOutput)
---			if xrandrOutput ~= defaultOutput then
---				return '--output ' .. xrandrOutput .. ' --auto --same-as ' .. defaultOutput
---			end
---			return nil
---		end,
---		['disconnected'] = function (xrandrOutput)
---			if xrandrOutput ~= defaultOutput then
---			return '--output ' .. xrandrOutput .. ' --off --output ' .. defaultOutput .. ' --auto'
---			end
---			return nil
---		end
---	}
